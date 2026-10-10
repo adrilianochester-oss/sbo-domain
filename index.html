@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SBO Domain</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas id="bgCanvas"></canvas>
+
+    <div class="page-shell">
+      <section class="welcome-screen" id="welcomeScreen">
+        <div class="badge">Student Body Organization</div>
+        <h1>Welcome to the SBO Domain</h1>
+        <p>
+          Click anywhere to enter the official workspace and responsibilities.
+        </p>
+      </section>
+
+      <section
+        class="workspace-screen hidden"
+        id="workspaceScreen"
+        aria-live="polite"
+      >
+        <header class="workspace-header">
+          <div>
+            <p class="eyebrow">Official Workspace</p>
+            <h2>Student Body Organization</h2>
+          </div>
+          <div class="header-actions">
+            <button
+              class="edit-officers-btn"
+              id="editOfficersBtn"
+              type="button"
+            >
+              Edit officers
+            </button>
+            <button class="home-btn" id="homeBtn" type="button">
+              Back to Welcome
+            </button>
+          </div>
+        </header>
+
+        <div class="workspace-grid">
+          <aside class="roles-panel">
+            <h3>Officers</h3>
+            <div class="role-list" aria-label="Student body officers">
+              <button class="role-item active" data-role="President">
+                President
+              </button>
+              <button
+                class="role-item"
+                data-role="Vice President for Religious Affairs"
+              >
+                Vice President for Religious Affairs
+              </button>
+              <button
+                class="role-item"
+                data-role="Vice President for Social Affairs"
+              >
+                Vice President for Social Affairs
+              </button>
+              <button class="role-item" data-role="Secretary">Secretary</button>
+              <button class="role-item" data-role="Treasurer">Treasurer</button>
+              <button class="role-item" data-role="Auditor">Auditor</button>
+              <button
+                class="role-item"
+                data-role="Public Information Officer 1"
+              >
+                Public Information Officer 1
+              </button>
+              <button
+                class="role-item"
+                data-role="Public Information Officer 2"
+              >
+                Public Information Officer 2
+              </button>
+              <p class="role-group-label">Grade Representatives</p>
+              <button class="role-item" data-role="Grade 5 Representative">
+                Grade 5 Representative
+              </button>
+              <button class="role-item" data-role="Grade 6 Representative">
+                Grade 6 Representative
+              </button>
+              <button class="role-item" data-role="Grade 7 Representative">
+                Grade 7 Representative
+              </button>
+              <button class="role-item" data-role="Grade 8 Representative">
+                Grade 8 Representative
+              </button>
+              <button class="role-item" data-role="Grade 9 Representative">
+                Grade 9 Representative
+              </button>
+              <button class="role-item" data-role="Grade 10 Representative">
+                Grade 10 Representative
+              </button>
+              <button class="role-item" data-role="Grade 11 Representative">
+                Grade 11 Representative
+              </button>
+              <button class="role-item" data-role="Grade 12 Representative">
+                Grade 12 Representative
+              </button>
+              <p class="role-group-label">Senators</p>
+              <button class="role-item" data-role="Senator 1">Senator 1</button>
+              <button class="role-item" data-role="Senator 2">Senator 2</button>
+              <button class="role-item" data-role="Senator 3">Senator 3</button>
+              <button class="role-item" data-role="Senator 4">Senator 4</button>
+              <button class="role-item" data-role="Senator 5">Senator 5</button>
+            </div>
+          </aside>
+
+          <main class="responsibility-panel">
+            <p class="office-label">Office</p>
+            <h3 id="officeTitle">President</h3>
+            <p class="office-holder hidden" id="officeHolder"></p>
+            <p id="officeDescription">
+              Leads the Student Body Organization, oversees all major decisions,
+              and ensures that the goals of the organization are carried out
+              with responsibility and unity.
+            </p>
+
+            <div class="bulletin-board">
+              <div class="board-header">
+                <h4>Bulletin Board</h4>
+                <div class="board-header-actions">
+                  <span id="boardTag">Announcements</span>
+                  <button
+                    class="board-add-btn"
+                    id="addBoardItemBtn"
+                    type="button"
+                  >
+                    Add item
+                  </button>
+                </div>
+              </div>
+              <div class="board-grid" id="boardNotes"></div>
+              <form class="board-editor hidden" id="boardEditor">
+                <label for="boardItemLabel">Category</label>
+                <input
+                  id="boardItemLabel"
+                  type="text"
+                  maxlength="40"
+                  placeholder="Task, announcement, meeting note..."
+                  required
+                />
+                <label for="boardItemText">Information</label>
+                <textarea
+                  id="boardItemText"
+                  rows="3"
+                  maxlength="600"
+                  placeholder="Enter the task or information for this officer..."
+                  required
+                ></textarea>
+                <div class="board-editor-actions">
+                  <button
+                    class="board-cancel-btn"
+                    id="cancelBoardEditBtn"
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                  <button class="board-save-btn" type="submit">
+                    Save item
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <section
+              class="secretary-notes hidden"
+              id="secretaryNotes"
+              aria-label="Secretary notes"
+            >
+              <div class="notes-header">
+                <div>
+                  <p class="office-label">Secretary Workspace</p>
+                  <h4>Meeting Notes &amp; Documents</h4>
+                </div>
+                <div class="notes-header-actions">
+                  <button class="note-action" id="takeMinutesBtn" type="button">
+                    Take minutes
+                  </button>
+                  <button
+                    class="note-action primary-action"
+                    id="newNoteBtn"
+                    type="button"
+                  >
+                    New note
+                  </button>
+                </div>
+              </div>
+              <div class="notes-layout">
+                <nav class="saved-notes-panel" aria-label="Saved notes">
+                  <h5>Saved notes</h5>
+                  <div id="savedNotesList"></div>
+                </nav>
+                <div class="note-editor">
+                  <label for="noteTitle">Document title</label>
+                  <input
+                    id="noteTitle"
+                    type="text"
+                    maxlength="120"
+                    placeholder="Meeting minutes"
+                  />
+                  <label for="noteContent">Document</label>
+                  <textarea
+                    id="noteContent"
+                    placeholder="Write meeting notes, decisions, and follow-up items..."
+                  ></textarea>
+                  <div class="note-editor-footer">
+                    <span id="noteStatus" role="status" aria-live="polite"
+                      >Notes are saved in this browser.</span
+                    >
+                    <div class="note-actions">
+                      <button
+                        class="note-action danger-action"
+                        id="deleteNoteBtn"
+                        type="button"
+                        disabled
+                      >
+                        Delete
+                      </button>
+                      <button
+                        class="note-action primary-action"
+                        id="saveNoteBtn"
+                        type="button"
+                      >
+                        Save note
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </main>
+        </div>
+
+        <section class="task-tracker" aria-labelledby="taskTrackerTitle">
+          <div class="task-tracker-header">
+            <div>
+              <p class="eyebrow">Follow-through</p>
+              <h2 id="taskTrackerTitle">Officer task tracker</h2>
+            </div>
+            <label class="task-filter-label" for="taskFilter"
+              >Showing
+              <select id="taskFilter">
+                <option value="all">All officers</option>
+              </select>
+            </label>
+          </div>
+          <form class="task-form" id="taskForm">
+            <div class="task-field task-title-field">
+              <label for="taskTitle">Task</label>
+              <input
+                id="taskTitle"
+                type="text"
+                maxlength="160"
+                placeholder="Add a task or follow-up"
+                required
+              />
+            </div>
+            <div class="task-field">
+              <label for="taskAssignee">Assign to</label>
+              <select id="taskAssignee" required></select>
+            </div>
+            <div class="task-field">
+              <label for="taskDueDate">Due date</label>
+              <input id="taskDueDate" type="date" />
+            </div>
+            <button class="task-add-btn" type="submit">Add task</button>
+          </form>
+          <div class="task-list" id="taskList" aria-live="polite"></div>
+        </section>
+
+        <section class="governance-center" aria-labelledby="governanceTitle">
+          <div class="governance-header">
+            <div>
+              <p class="eyebrow">Student Governance</p>
+              <h2 id="governanceTitle">Proposals &amp; Motions</h2>
+            </div>
+            <span class="governance-status">Open for review</span>
+          </div>
+          <form class="proposal-form" id="proposalForm">
+            <div class="task-field proposal-title-field">
+              <label for="proposalTitle">Proposal title</label>
+              <input
+                id="proposalTitle"
+                type="text"
+                maxlength="160"
+                placeholder="Name the proposal or motion"
+                required
+              />
+            </div>
+            <div class="task-field">
+              <label for="proposalSponsor">Sponsored by</label>
+              <select id="proposalSponsor" required></select>
+            </div>
+            <div class="task-field">
+              <label for="proposalMeetingDate">Meeting date</label>
+              <input id="proposalMeetingDate" type="date" />
+            </div>
+            <div class="task-field proposal-description-field">
+              <label for="proposalDescription">Summary</label>
+              <textarea
+                id="proposalDescription"
+                rows="3"
+                maxlength="600"
+                placeholder="Describe the issue, proposed action, and expected benefit"
+                required
+              ></textarea>
+            </div>
+            <button class="task-add-btn" type="submit">Submit proposal</button>
+          </form>
+          <div class="proposal-list" id="proposalList" aria-live="polite"></div>
+        </section>
+      </section>
+    </div>
+
+    <dialog
+      class="officer-dialog"
+      id="officerDialog"
+      aria-labelledby="officerDialogTitle"
+    >
+      <form id="officerNamesForm">
+        <div class="dialog-header">
+          <div>
+            <p class="office-label">Workspace Settings</p>
+            <h2 id="officerDialogTitle">Officer names</h2>
+          </div>
+          <button
+            class="dialog-close"
+            id="closeOfficerDialogBtn"
+            type="button"
+            aria-label="Close"
+          >
+            &times;
+          </button>
+        </div>
+        <p class="dialog-description">
+          Add or update the name of the person holding each office.
+        </p>
+        <div class="officer-name-fields" id="officerNameFields"></div>
+        <div class="dialog-footer">
+          <span id="officerNamesStatus" role="status" aria-live="polite"></span>
+          <div class="note-actions">
+            <button
+              class="board-cancel-btn"
+              id="cancelOfficerNamesBtn"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button class="board-save-btn" type="submit">Save names</button>
+          </div>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>
